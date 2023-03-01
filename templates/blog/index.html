@@ -1,0 +1,138 @@
+{% extends "layout.html" %} {% load i18n %} {% block inicio %}
+
+<!--********************************************
+*  ESTE ES MI HEADER
+*********************************************-->
+
+<header class="container-fluid p-0" style="">
+  <div class="row p-0">
+    <div class="container col-12 " style=" position: relative">
+      <img src="/media/desarrollo/front.jpg" style="width: 100%" />
+      <div style="position: absolute; top: 45%; left: 10%; width: 100%">
+        <h1 class="display-4 fw-bolder">
+          S T R E E T
+        </h1>
+        <h3>peluquería</h3>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--********************************************
+*  ESTE ES MI SECTION PRIMARIO
+*********************************************-->
+<div class="row">
+  <div class="col-12">
+    <center><h1 class="mt-5 mb-5">Bienvenidos a nuestra peluquería</h1></center>
+  </div>
+</div>
+
+<div class="card mb-5" style="border:none; max-width: 100%">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="/media/desarrollo/card1.jpg"
+        class="img-fluid rounded-start"
+        alt="..."
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <center><h1 class="card-title">HISTORIA</h1></center>
+        <p>
+        </p>
+        <p class="card-text mt-5">
+          Salon STREET desde 2001. Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Culpa explicabo eius fugit molestias nobis
+          consectetur magni optio tempore dolorem quasi ad ipsa adipisci
+          doloremque, ratione reprehenderit repellat totam, voluptatum natus.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--********************************************
+*  ESTE ES MI SECTION secundario (ubicacion) y form de contacto
+*********************************************-->
+
+
+<section class="text-center mb-5 mb-5">
+
+
+    <h3 class="mb-5">Contáctanos</h3>
+  
+    <div class="row">
+      <div class="col-lg-5">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d438.035648008123!2d-64.18640043719927!3d-31.4272103987122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x462b122637c2b6c6!2sSal%C3%B3n%20Street%2022!5e0!3m2!1ses-419!2sar!4v1671903271837!5m2!1ses-419!2sar"  
+            class="h-100 w-100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+  
+
+      <div class="col-lg-7">
+        <form action="{% url 'blog:enviar_mensaje' %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+          {{form.captcha}}
+          <div class="row">
+            <div class="col-md-9">
+              <div class="row mb-4">
+                <div class="col-md-6 mb-4 mb-md-0">
+                  <div class="form-outline">
+                    <input type="text" id="form3Example1" name="nombre" class="form-control" />
+                    <label class="form-label" for="form3Example1">Nombre</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-outline">
+                    <input type="email" id="form3Example2" name="email" class="form-control" />
+                    <label class="form-label" for="form3Example2">Email</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <input type="text" id="form3Example3" name="asunto" class="form-control" />
+                <label class="form-label" for="form3Example3">Asunto</label>
+              </div>
+              <div class="form-outline mb-4">
+                <textarea class="form-control" id="form4Example4" name="mensaje" rows="4"></textarea>
+                <label class="form-label" for="form4Example4">Mensaje</label>
+              </div>
+              <div class="form-outline mb-4">
+                {{form.captcha}}
+                <!-- <textarea class="form-control" id="form4Example5" name="captcha" rows="4"></textarea>
+                <label class="form-label" for="form4Example5">Captcha</label> -->
+              </div>
+              <div class="text-center text-md-start">
+                <button type="submit" class="btn btn-primary mb-5 mb-md-0">
+                  Enviar
+                </button>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <ul class="list-unstyled">
+                <li>
+                  <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                  <p><small>Nueva Córdoba, Córdoba, Arg</small></p>
+                </li>
+                <li>
+                  <i class="fas fa-phone fa-2x text-primary"></i>
+                  <p><small>351 2946883</small></p>
+                </li>
+                <li>
+                  <i class="fas fa-envelope fa-2x text-primary"></i>
+                  <p><small>street_peluqueria@gmail.com</small></p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+  
+      </div>
+    </div>
+  
+  
+  </section>
+
+
+
+{% endblock inicio %}

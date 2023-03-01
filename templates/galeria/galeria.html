@@ -1,0 +1,137 @@
+{% extends "layout.html" %} {% load i18n %} {% block galeria %}
+
+<!--********************************************
+*  ESTE ES el header con carrousel 
+* AQUI DEBEN mostrarse la imagenes marcadas como destacadas en el modelo
+*********************************************-->
+<header>
+  <!-- Contenedor del Carrousel  -->
+  <div id="carouselExampleCaptions" class="carousel slide carousel-fade mt-5 bg-dark" data-bs-ride="false">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="/media/galeria/images/galeria1.jpg" class="d-block w-50 " style="margin: auto" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Equiqueta primer slide</h5>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="/media/galeria/images/galeria2.jpg" class="d-block w-50" style="margin: auto" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta segundo slide</h5>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="5000">
+        <img src="/media/galeria/images/galeria3.jpg" class="d-block w-50" style="margin: auto" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Etiqueta tercer slide</h5>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon  aria-hidden=" true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</header>
+
+<!--********************************************
+* section titulo introductorio
+*********************************************-->
+<section class="row">
+  <div class="intro mt-5">
+    <p class="text-center fw-bold fs-1">Nuestros trabajos.</p>
+    <p class="text-center fs-3">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat,
+      pellentesque ut laoreet vitae. </p>
+  </div>
+</section>
+
+<!-- --------------------------------------------------
+  -      SECTION GALERIA DE IMAGENES
+  -   aquí se deben mostrar el resto de las imagenes de la galeria
+  ------------------------------------------------------->
+<section>
+  <div class="row">
+    <div class="photo-gallery mt-5">
+      <div class="container">
+        <div class="row photos">
+          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
+              href="/media/galeria/images/300566494_795336351617917_8420614701943986606_n.jpg"
+              data-lightbox="photos"><img class="img-fluid"
+                src="/media/galeria/images/300566494_795336351617917_8420614701943986606_n.jpg"></a></div>
+          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
+              href="/media/galeria/images/300615696_1507487016377691_7926308871762354148_n.jpg"
+              data-lightbox="photos"><img class="img-fluid"
+                src="/media/galeria/images/300615696_1507487016377691_7926308871762354148_n.jpg"></a></div>
+          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
+              href="/media/galeria/images/315647882_126138866928453_4139703692442653507_n.jpg"
+              data-lightbox="photos"><img class="img-fluid"
+                src="/media/galeria/images/315647882_126138866928453_4139703692442653507_n.jpg"></a></div>
+          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
+              href="/media/galeria/images/316466256_6268706693141607_2306908048606362920_n.jpg"
+              data-lightbox="photos"><img class="img-fluid"
+                src="/media/galeria/images/316466256_6268706693141607_2306908048606362920_n.jpg"></a></div>
+          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
+              href="/media/galeria/images/highlights - 17907155866270286 (1).jpg" data-lightbox="photos"><img
+                class="img-fluid" src="/media/galeria/images/highlights - 17907155866270286 (1).jpg"></a></div>
+          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
+              href="/media/galeria/images/highlights - 18200753872056204.jpg" data-lightbox="photos"><img
+                class="img-fluid" src="/media/galeria/images/highlights - 18200753872056204.jpg"></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</section>
+<!-- --------------------------------------------------
+  -      SIDEBAR DE BUSQUEDA
+  -  A IMPLEMENTAR!!!!!
+  ------------------------------------------------------->
+
+
+<!-- ----------------------------------------------
+BOTONES DE PAGINACION
+---------------------------------------------- -->
+<section>
+  <nav aria-label="Page navigation example"  >
+    <ul class="pagination justify-content-center mt-5" >
+      <li class="page-item disabled">
+        <a class="page-link bg-dark" style="border-color: grey;">Anterior</a>
+      </li>
+      <li class="page-item" ><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">1</a></li>
+      <li class="page-item"><a class="page-link bg-dark" style="border-color:grey; color: white;" href="#">2</a></li>
+      <li class="page-item"><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+</section>
+
+
+<section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+
+</section>
+
+{% endblock %}

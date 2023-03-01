@@ -1,0 +1,282 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block tienda %}
+
+
+<!-- -------------------------------------
+- HEADER DE LA Tienda - Muestra Producto destacado
+------------------------------------- -->
+
+
+<!-- Header-->
+<header class="bg-dark py-1">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Tienda Street</h1>
+            <!-- <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p> -->
+        </div>
+
+        <center><img src="/media/desarrollo/16300420190220_766502_blond-absolu-keglamour-kerastase.jpg"
+                style="width: auto; margin:auto auto" /></center>
+    </div>
+</header>
+
+<!-- -------------------------------------
+- SECTION DE LA Tienda - Listado de productos 
+------------------------------------- -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" src="/media/desarrollo/producto1.jpg" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Producto 1</h5>
+                            <!-- Product price-->
+                            $4000.00 - $8000.00
+                        </div>
+                    </div>
+                    <!-- Acciones: ACÁ PUEDO AGREGAR BOTONES SEGÚN NECESIDAD (BOTON VER, BOTON AGREGAR AL CARRITO...) -->
+ 
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                      
+
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Ofertas -->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                    </div>
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto2.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h5 class="fw-bolder">Producto 2</h5>
+                            <!-- Calificaciones del producto -->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Precio del producto -->
+                            <span class="text-muted text-decoration-line-through">$2000.00</span>
+                            $1800.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Ofertas -->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                    </div>
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto3.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h5 class="fw-bolder">Producto 3</h5>
+                            <!-- Precio del Producto -->
+                            <span class="text-muted text-decoration-line-through">$5000.00</span>
+                            $2500.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto4.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h5 class="fw-bolder">Producto 4</h5>
+                            <!-- Calificaciones del producto -->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Precio del producto -->
+                            $4000.00
+                        </div>
+                    </div>
+                    <!-- Acciones del producto -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Oferta -->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                        Oferta
+                    </div>
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto5.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h5 class="fw-bolder">Producto 5</h5>
+                            <!-- Precio del producto -->
+                            <span class="text-muted text-decoration-line-through">$5000.00</span>
+                            $2500.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto6.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del  producto -->
+                            <h5 class="fw-bolder">Producto 6</h5>
+                            <!-- Precio del producto -->
+                            $1200.00 - $2800.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Oferta -->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                        Oferta
+                    </div>
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto7.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h5 class="fw-bolder">Producto 7</h5>
+                            <!-- Calificaciones del producto -->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Precio del producto -->
+                            <span class="text-muted text-decoration-line-through">$2000.00</span>
+                            $1800.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto8.jpg" alt="..." />
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h5 class="fw-bolder">Producto 8</h5>
+                            <!-- Calificaciones del producto-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Precio del producto -->
+                            $4000.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="producto/">Ver</a></div>
+                        <div class="text-center" ><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- --------------------------------------------------
+  -      SIDEBAR DE BUSQUEDA
+  -  A IMPLEMENTAR!!!!!
+  ------------------------------------------------------->
+
+
+
+
+<!-- ----------------------------------------------
+BOTONES DE PAGINACION
+---------------------------------------------- -->
+
+<section>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-5">
+            <li class="page-item disabled">
+                <a class="page-link bg-dark" style="border-color: grey;">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link bg-dark" style="border-color:grey; color: white;" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</section>
+
+
+
+{% endblock tienda %}

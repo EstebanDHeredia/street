@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block producto %}
+
+
+<!-- -------------------------------------
+- SECTION DE Producto
+------------------------------------- -->
+<!-- Section del producto -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
+                    src="/media/desarrollo/producto1.jpg" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">SKU: BST-498</div>
+                <h1 class="display-5 fw-bolder">Nombre producto</h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through">$4500.00</span>
+                    <span>$4000.00</span>
+                </div>
+                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem
+                    modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus
+                    ipsam minima ea iste laborum vero?</p>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
+                        style="max-width: 3rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        Agregar al carro
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Sección para los items relacionados por marca o tipo -->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">Productos Relacionados</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Imagen del producto-->
+                    <img class="card-img-top" src="/media/desarrollo/producto8.jpg" alt="..." />
+                    <!-- Detalles del Producto-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder" style="height: 50px;">Producto 8</h5>
+                            <!-- Precio del producto -->
+                            $4000.00 - $8000.00
+                        </div>
+                    </div>
+                    <!-- Acciones-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Ver</a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Oferta! -->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                    </div>
+                    <!-- Imagen del producto-->
+                    <img class="card-img-top" src="/media/desarrollo/producto2.jpg" alt="..." />
+                    <!-- Detalle del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del producto-->
+                            <h5 class="fw-bolder" style="height: 50px;">Producto 2</h5>
+                            <!-- Calificacion del producto-->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- Precio del producto -->
+                            <span class="text-muted text-decoration-line-through">$2000.00</span>
+                            $1800.00
+                        </div>
+                    </div>
+                    <!-- Acciones del producto -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Oferta -->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                    </div>
+                    <!-- imagen del producto -->
+                    <img class="card-img-top" src="/media/desarrollo/producto3.jpg" alt="..." />
+                    <!-- detalle del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Nombre del Producto -->
+                            <h5 class="fw-bolder" style="height: 50px;">Producto 3</h5>
+                            <!-- precio del producto -->
+                            <span class="text-muted text-decoration-line-through">$5000.00</span>
+                            $2500.00
+                        </div>
+                    </div>
+                    <!-- Acciones -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- imagen del producto-->
+                    <img class="card-img-top" src="/media/desarrollo/producto5.jpg" alt="..." />
+                    <!-- detalle del producto-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- nombre del producto-->
+                            <h5 class="fw-bolder" style="height: 50px;">Producto 4</h5>
+                            <!-- Calificaciones del producto -->
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            <!-- precio del producto-->
+                            $40.00
+                        </div>
+                    </div>
+                    <!-- Acciones del producto-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock producto %}
+

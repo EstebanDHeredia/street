@@ -1,0 +1,112 @@
+{% extends "layout.html" %} {% load i18n %} {% block blog %}
+
+<!-- ----------------------------------------------
+ARTICULO PRINCIPAL
+---------------------------------------------- -->
+
+<div class="card mb-3 border-0 bg-dark ">
+  <img class="card-img-top"
+    src="/media/desarrollo/post_principal4.jpg"
+    style="width: 50%; margin: auto auto"
+    alt=""
+  />
+  <center>
+    <div class="card-body" style="color: white;">
+      <h5 class="card-title">Post Principal</h5>
+      <p class="card-text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ullam
+        hic recusandae voluptatum id voluptas officiis rerum accusamus ut facere
+        a possimus est tempore ratione, odit molestias laudantium iusto
+        deserunt.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Fecha publicacion</small>
+      </p>
+      <a href="#!" class="btn btn-primary">Leer</a>
+    </div>
+  </center>
+</div>
+
+<!-- ----------------------------------------------
+ARTICULOS SECUNDARIOS
+---------------------------------------------- -->
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div
+          class="bg-image hover-overlay ripple"
+          data-mdb-ripple-color="light"
+        >
+          <img
+            src="/media/desarrollo/card1.jpg"
+            class="img-fluid"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.15)"
+            ></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Post 2</h5>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ex hic aliquam praesentium eveniet placeat! Possimus molestiae repellendus mollitia explicabo odit eius! Qui consequuntur laboriosam, corrupti dolorem dolor ea accusantium.
+          </p>
+          <a href="#!" class="btn btn-primary">Leer</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div
+          class="bg-image hover-overlay ripple"
+          data-mdb-ripple-color="light"
+        >
+          <img
+            src="/media/desarrollo/post_principal.jpg"
+            class="img-fluid"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.15)"
+            ></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Post 3</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#!" class="btn btn-primary">Leer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ----------------------------------------------
+BOTONES DE PAGINACION
+---------------------------------------------- -->
+
+<section>
+  <nav aria-label="Page navigation example"  >
+    <ul class="pagination justify-content-center mt-5" >
+      <li class="page-item disabled">
+        <a class="page-link bg-dark" style="border-color: grey;">Anterior</a>
+      </li>
+      <li class="page-item" ><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">1</a></li>
+      <li class="page-item"><a class="page-link bg-dark" style="border-color:grey; color: white;" href="#">2</a></li>
+      <li class="page-item"><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+</section>
+
+
+{% endblock blog %}

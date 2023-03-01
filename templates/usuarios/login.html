@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      src="https://kit.fontawesome.com/85e7c78085.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+  </head>
+
+  <body>
+    <!-- <div id="template-bg-1">
+      <div
+        class="d-flex flex-column min-vh-100 justify-content-center align-items-center"
+      >
+        <div class="card p-4 text-light bg-dark mb-5">
+          <div class="card-header">
+            <h3>Iniciar sesión</h3>
+          </div>
+          <div class="card-body w-100">
+            <form name="login" action="" method="post">
+              <div class="input-group form-group mt-3">
+                <div class="bg-secondary rounded-start">
+                  <span class="m-3"><i class="fas fa-user mt-2"></i></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Usuario"
+                  name="username"
+                />
+              </div>
+              <div class="input-group form-group mt-3">
+                <div class="bg-secondary rounded-start">
+                  <span class="m-3"><i class="fas fa-key mt-2"></i></span>
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Contraseña"
+                  name="password"
+                />
+              </div>
+
+              <div class="form-group mt-3">
+                <input
+                  type="submit"
+                  value="Acceder"
+                  class="btn bg-secondary float-end text-white w-100"
+                  name="login-btn"
+                />
+              </div>
+            </form>
+            <div class="text-danger"><?php echo $loginResult;?></div>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-center">
+              <div class="text-primary">
+                Si es un usuario registrado, inicie sesión aquí.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    {% if request.user.is_authenticated %}
+            <p>usuario logueado: {{nombre_usuario}}</p>
+            <button onclick="window.location.href='/'">Home</button>
+            <button onclick="window.location.href='/accounts/logout/'">Desloguearse</button>
+
+        {% else %}
+            <p>Usuario no logueado</p>
+            <button onclick="window.location.href='/accounts/login/'">Loguearse</button>            
+        {% endif %}
+  </body>
+</html>
