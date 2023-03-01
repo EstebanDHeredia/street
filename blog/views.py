@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.shortcuts import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -12,19 +13,39 @@ from .forms import MensajeForm
 # Create your views here.
 
 def lista_post(request):
-    posts = Post.objects.all()
-    autores = Autor.objects.all()
-    categorias = Categoria.objects.all()
-    tags = Tag.objects.all()
-    comentarios = Comentario.objects.all()
-    context = {
-        'posts': posts,
-        'autores': autores,
-        'categorias': categorias,
-        'tags': tags,
-        'comentarios': comentarios
-    }
-    return render(request, 'blog/posts.html', context)
+    # posts = Post.objects.all()
+    # autores = Autor.objects.all()
+    # categorias = Categoria.objects.all()
+    # tags = Tag.objects.all()
+    # comentarios = Comentario.objects.all()
+    # context = {
+    #     'posts': posts,
+    #     'autores': autores,
+    #     'categorias': categorias,
+    #     'tags': tags,
+    #     'comentarios': comentarios
+    # }
+
+
+    params = {}
+
+    # Busco la cantidad de post publicados eliminando el ultimo ya que este se muestra como blog principal
+    post_list = Post.objects.filter(estado="publicado").order_by('-publicado_en')[1:]
+    paginador = Paginator(post_list, 2) # Mostramos 2 post por pagina
+    nro_pagina = request.GET.get('page')
+    page_obj = paginador.get_page(nro_pagina) # Obtengo los post de esa pagína para pasarlos al template
+    params["page_obj"] = page_obj
+
+    # Busco el post Publicado mas reciente para enviarlo como Post Principal de la pagina
+    post_principal = Post.objects.filter(estado="publicado").order_by('-publicado_en').first()
+    params["post_principal"] = post_principal
+
+    # Busco los otros dos post para poner en la pagina
+    # post_secundarios = Post.objects.filter(estado="publicado").order_by('-publicado_en')[1:3]
+    # params["post_secundarios"] = post_secundarios
+    # print(params["post_secundarios"])
+
+    return render(request, 'blog/posts.html', params)
 
 def index(request):
     return render(request, 'blog/index.html')

@@ -6,21 +6,18 @@ ARTICULO PRINCIPAL
 
 <div class="card mb-3 border-0 bg-dark ">
   <img class="card-img-top"
-    src="/media/desarrollo/post_principal4.jpg"
-    style="width: 50%; margin: auto auto"
+    src="{{post_principal.imagen.url}}"
+    style="width: 30%; margin: auto auto"
     alt=""
   />
   <center>
     <div class="card-body" style="color: white;">
-      <h5 class="card-title">Post Principal</h5>
+      <h5 class="card-title">{{post_principal.titulo}}</h5>
       <p class="card-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ullam
-        hic recusandae voluptatum id voluptas officiis rerum accusamus ut facere
-        a possimus est tempore ratione, odit molestias laudantium iusto
-        deserunt.
+        {{post_principal.cuerpo}}
       </p>
       <p class="card-text">
-        <small class="text-muted">Fecha publicacion</small>
+        <small class="text-muted">{{post_principal.publicado_en|date:"d-M-Y"}}</small>
       </p>
       <a href="#!" class="btn btn-primary">Leer</a>
     </div>
@@ -32,59 +29,36 @@ ARTICULOS SECUNDARIOS
 ---------------------------------------------- -->
 <div class="container">
   <div class="row">
-    <div class="col-6">
-      <div class="card">
-        <div
-          class="bg-image hover-overlay ripple"
-          data-mdb-ripple-color="light"
-        >
-          <img
-            src="/media/desarrollo/card1.jpg"
-            class="img-fluid"
-          />
-          <a href="#!">
-            <div
-              class="mask"
-              style="background-color: rgba(251, 251, 251, 0.15)"
-            ></div>
-          </a>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Post 2</h5>
-          <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore ex hic aliquam praesentium eveniet placeat! Possimus molestiae repellendus mollitia explicabo odit eius! Qui consequuntur laboriosam, corrupti dolorem dolor ea accusantium.
-          </p>
-          <a href="#!" class="btn btn-primary">Leer</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="card">
-        <div
-          class="bg-image hover-overlay ripple"
-          data-mdb-ripple-color="light"
-        >
-          <img
-            src="/media/desarrollo/post_principal.jpg"
-            class="img-fluid"
-          />
-          <a href="#!">
-            <div
-              class="mask"
-              style="background-color: rgba(251, 251, 251, 0.15)"
-            ></div>
-          </a>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Post 3</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#!" class="btn btn-primary">Leer</a>
+    {% for post in page_obj %}
+      <div class="col-6">
+        <div class="card">
+          <div
+            class="bg-image hover-overlay ripple"
+            data-mdb-ripple-color="light"
+          >
+            <img
+              src="{{post.imagen.url}}"
+              class="img-fluid"
+            />
+            <a href="#!">
+              <div
+                class="mask"
+                style="background-color: rgba(251, 251, 251, 0.15)"
+              ></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{post.titulo}}</h5>
+            <p class="card-text">
+              {{post.cuerpo}}
+            </p>
+            <a href="#!" class="btn btn-primary">Leer</a>
+          </div>
         </div>
       </div>
-    </div>
+    {% empty %}
+      <p>No hay mas Post publicados...</p>
+    {% endfor %}
   </div>
 </div>
 
@@ -107,6 +81,24 @@ BOTONES DE PAGINACION
     </ul>
   </nav>
 </section>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; Primera</a>
+      <a href="?page={{ page_obj.previous_page_number }}">&lsaquo; Anterior</a>
+    {% endif %}
+
+    <span class="current-page">
+      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number}}">Siguiente &rsaquo;</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">Última &rsaquo;</a>
+    {% endif %}
+  </span>
+</div>
 
 
 {% endblock blog %}
