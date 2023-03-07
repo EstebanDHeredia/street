@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.shortcuts import reverse
@@ -13,19 +13,6 @@ from .forms import MensajeForm
 # Create your views here.
 
 def lista_post(request):
-    # posts = Post.objects.all()
-    # autores = Autor.objects.all()
-    # categorias = Categoria.objects.all()
-    # tags = Tag.objects.all()
-    # comentarios = Comentario.objects.all()
-    # context = {
-    #     'posts': posts,
-    #     'autores': autores,
-    #     'categorias': categorias,
-    #     'tags': tags,
-    #     'comentarios': comentarios
-    # }
-
 
     params = {}
 
@@ -49,6 +36,10 @@ def lista_post(request):
 
 def index(request):
     return render(request, 'blog/index.html')
+
+def post_detalle(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post.html', {'post': post})
 
 
 

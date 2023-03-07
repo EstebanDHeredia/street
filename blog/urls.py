@@ -6,5 +6,6 @@ from blog.views import enviar_mensaje
 urlpatterns = [
     path('', views.index, name='index'),
     path('lista_post', views.lista_post, name='lista_post'),
-    path('enviar_mensaje', views.enviar_mensaje, name="enviar_mensaje")
+    path('enviar_mensaje', views.enviar_mensaje, name="enviar_mensaje"),
+    path('post/<int:pk>/', views.post_detalle, name='post_detalle'),
 ]

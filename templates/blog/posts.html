@@ -1,5 +1,13 @@
 {% extends "layout.html" %} {% load i18n %} {% block blog %}
 
+  <!-- Agregar estilos CSS -->
+  <style>
+    .page-item.active .page-link {
+      /* background-color: white; */
+      border-color: red;
+      color: #fff;
+    }
+  </style>
 <!-- ----------------------------------------------
 ARTICULO PRINCIPAL
 ---------------------------------------------- -->
@@ -14,12 +22,12 @@ ARTICULO PRINCIPAL
     <div class="card-body" style="color: white;">
       <h5 class="card-title">{{post_principal.titulo}}</h5>
       <p class="card-text">
-        {{post_principal.cuerpo}}
+        {{post_principal.resumen}}
       </p>
       <p class="card-text">
         <small class="text-muted">{{post_principal.publicado_en|date:"d-M-Y"}}</small>
       </p>
-      <a href="#!" class="btn btn-primary">Leer</a>
+      <a href="{% url 'blog:post_detalle' pk=post_principal.id %}" class="btn btn-primary">Leer</a>
     </div>
   </center>
 </div>
@@ -40,7 +48,7 @@ ARTICULOS SECUNDARIOS
               src="{{post.imagen.url}}"
               class="img-fluid"
             />
-            <a href="#!">
+            <a href="{% url 'blog:post_detalle' pk=post.id %}">
               <div
                 class="mask"
                 style="background-color: rgba(251, 251, 251, 0.15)"
@@ -50,9 +58,9 @@ ARTICULOS SECUNDARIOS
           <div class="card-body">
             <h5 class="card-title">{{post.titulo}}</h5>
             <p class="card-text">
-              {{post.cuerpo}}
+              {{post.resumen}}
             </p>
-            <a href="#!" class="btn btn-primary">Leer</a>
+            <a href="{% url 'blog:post_detalle' pk=post.id %}" class="btn btn-primary">Leer</a>
           </div>
         </div>
       </div>
@@ -66,7 +74,7 @@ ARTICULOS SECUNDARIOS
 BOTONES DE PAGINACION
 ---------------------------------------------- -->
 
-<section>
+<!-- <section>
   <nav aria-label="Page navigation example"  >
     <ul class="pagination justify-content-center mt-5" >
       <li class="page-item disabled">
@@ -80,25 +88,27 @@ BOTONES DE PAGINACION
       </li>
     </ul>
   </nav>
+</section> -->
+
+<section>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-5">
+      <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+        <a class="page-link bg-dark" style="border-color: grey;" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">Anterior</a>
+      </li>
+      {% for num in page_obj.paginator.page_range %}
+      <li style="border-color: grey" class="page-item bg-dark {% if num == page_obj.number %}active{% endif %}" >
+        <a style="border-color: grey" class="page-link bg-dark " href="?page={{ num }}">{{ num }}</a>
+      </li>
+    {% endfor %}
+    
+      <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+        <a class="page-link bg-dark" style="border-color: grey;" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
 </section>
-
-<div class="pagination">
-  <span class="step-links">
-    {% if page_obj.has_previous %}
-      <a href="?page=1">&laquo; Primera</a>
-      <a href="?page={{ page_obj.previous_page_number }}">&lsaquo; Anterior</a>
-    {% endif %}
-
-    <span class="current-page">
-      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
-    </span>
-
-    {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number}}">Siguiente &rsaquo;</a>
-      <a href="?page={{ page_obj.paginator.num_pages }}">Última &rsaquo;</a>
-    {% endif %}
-  </span>
-</div>
 
 
 {% endblock blog %}
+
