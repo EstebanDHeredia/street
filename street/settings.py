@@ -147,8 +147,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # PARAMETROS DE CONFIGURACION PARA REGISTRATION-REDUX
 # LOGIN_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = reverse_lazy('index')
-LOGOUT_REDIRECT_URL = reverse_lazy('index')
+LOGIN_REDIRECT_URL = reverse_lazy('blog:index')
+LOGOUT_REDIRECT_URL = reverse_lazy('blog:index')
 
 LOGIN_URL = 'django.contrib.auth.views.login'
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.

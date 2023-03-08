@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md)
  */
-/* line 1, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_root.scss */
+/* line 1, ../street/static_dev/scss/bootstrap/_root.scss */
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -60,7 +60,7 @@
   --bs-body-bg: #fff;
 }
 
-/* line 16, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 16, ../street/static_dev/scss/bootstrap/_reboot.scss */
 *,
 *::before,
 *::after {
@@ -68,13 +68,13 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* line 28, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+  /* line 28, ../street/static_dev/scss/bootstrap/_reboot.scss */
   :root {
     scroll-behavior: smooth;
   }
 }
 
-/* line 49, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 49, ../street/static_dev/scss/bootstrap/_reboot.scss */
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -88,7 +88,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* line 69, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 69, ../street/static_dev/scss/bootstrap/_reboot.scss */
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -97,12 +97,12 @@ hr {
   opacity: 0.25;
 }
 
-/* line 77, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 77, ../street/static_dev/scss/bootstrap/_reboot.scss */
 hr:not([size]) {
   height: 1px;
 }
 
-/* line 88, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 88, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -110,71 +110,71 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
-/* line 98, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 98, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
 
 @media (min-width: 1200px) {
-  /* line 98, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+  /* line 98, ../street/static_dev/scss/bootstrap/_reboot.scss */
   h1 {
     font-size: 2.5rem;
   }
 }
 
-/* line 103, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 103, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h2 {
   font-size: calc(1.325rem + 0.9vw);
 }
 
 @media (min-width: 1200px) {
-  /* line 103, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+  /* line 103, ../street/static_dev/scss/bootstrap/_reboot.scss */
   h2 {
     font-size: 2rem;
   }
 }
 
-/* line 108, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 108, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h3 {
   font-size: calc(1.3rem + 0.6vw);
 }
 
 @media (min-width: 1200px) {
-  /* line 108, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+  /* line 108, ../street/static_dev/scss/bootstrap/_reboot.scss */
   h3 {
     font-size: 1.75rem;
   }
 }
 
-/* line 113, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 113, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h4 {
   font-size: calc(1.275rem + 0.3vw);
 }
 
 @media (min-width: 1200px) {
-  /* line 113, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+  /* line 113, ../street/static_dev/scss/bootstrap/_reboot.scss */
   h4 {
     font-size: 1.5rem;
   }
 }
 
-/* line 118, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 118, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h5 {
   font-size: 1.25rem;
 }
 
-/* line 123, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 123, ../street/static_dev/scss/bootstrap/_reboot.scss */
 h6 {
   font-size: 1rem;
 }
 
-/* line 134, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 134, ../street/static_dev/scss/bootstrap/_reboot.scss */
 p {
   margin-top: 0;
   margin-bottom: 1rem;
 }
 
-/* line 147, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 147, ../street/static_dev/scss/bootstrap/_reboot.scss */
 abbr[title],
 abbr[data-bs-original-title] {
   text-decoration: underline dotted;
@@ -182,20 +182,20 @@ abbr[data-bs-original-title] {
   text-decoration-skip-ink: none;
 }
 
-/* line 157, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 157, ../street/static_dev/scss/bootstrap/_reboot.scss */
 address {
   margin-bottom: 1rem;
   font-style: normal;
   line-height: inherit;
 }
 
-/* line 166, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 166, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ol,
 ul {
   padding-left: 2rem;
 }
 
-/* line 171, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 171, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ol,
 ul,
 dl {
@@ -203,7 +203,7 @@ dl {
   margin-bottom: 1rem;
 }
 
-/* line 178, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 178, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ol ol,
 ul ul,
 ol ul,
@@ -211,40 +211,40 @@ ul ol {
   margin-bottom: 0;
 }
 
-/* line 185, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 185, ../street/static_dev/scss/bootstrap/_reboot.scss */
 dt {
   font-weight: 700;
 }
 
-/* line 191, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 191, ../street/static_dev/scss/bootstrap/_reboot.scss */
 dd {
   margin-bottom: .5rem;
   margin-left: 0;
 }
 
-/* line 199, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 199, ../street/static_dev/scss/bootstrap/_reboot.scss */
 blockquote {
   margin: 0 0 1rem;
 }
 
-/* line 208, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 208, ../street/static_dev/scss/bootstrap/_reboot.scss */
 b,
 strong {
   font-weight: bolder;
 }
 
-/* line 218, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 218, ../street/static_dev/scss/bootstrap/_reboot.scss */
 small {
   font-size: 0.875em;
 }
 
-/* line 225, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 225, ../street/static_dev/scss/bootstrap/_reboot.scss */
 mark {
   padding: 0.2em;
   background-color: #fcf8e3;
 }
 
-/* line 236, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 236, ../street/static_dev/scss/bootstrap/_reboot.scss */
 sub,
 sup {
   position: relative;
@@ -253,34 +253,34 @@ sup {
   vertical-align: baseline;
 }
 
-/* line 244, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 244, ../street/static_dev/scss/bootstrap/_reboot.scss */
 sub {
   bottom: -.25em;
 }
 
-/* line 245, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 245, ../street/static_dev/scss/bootstrap/_reboot.scss */
 sup {
   top: -.5em;
 }
 
-/* line 250, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 250, ../street/static_dev/scss/bootstrap/_reboot.scss */
 a {
   color: #0d6efd;
   text-decoration: underline;
 }
 
-/* line 254, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 254, ../street/static_dev/scss/bootstrap/_reboot.scss */
 a:hover {
   color: #0a58ca;
 }
 
-/* line 266, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 266, ../street/static_dev/scss/bootstrap/_reboot.scss */
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
   color: inherit;
   text-decoration: none;
 }
 
-/* line 276, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 276, ../street/static_dev/scss/bootstrap/_reboot.scss */
 pre,
 code,
 kbd,
@@ -291,7 +291,7 @@ samp {
   unicode-bidi: bidi-override;
 }
 
-/* line 290, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 290, ../street/static_dev/scss/bootstrap/_reboot.scss */
 pre {
   display: block;
   margin-top: 0;
@@ -300,26 +300,26 @@ pre {
   font-size: 0.875em;
 }
 
-/* line 299, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 299, ../street/static_dev/scss/bootstrap/_reboot.scss */
 pre code {
   font-size: inherit;
   color: inherit;
   word-break: normal;
 }
 
-/* line 306, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 306, ../street/static_dev/scss/bootstrap/_reboot.scss */
 code {
   font-size: 0.875em;
   color: #d63384;
   word-wrap: break-word;
 }
 
-/* line 312, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 312, ../street/static_dev/scss/bootstrap/_reboot.scss */
 a > code {
   color: inherit;
 }
 
-/* line 317, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 317, ../street/static_dev/scss/bootstrap/_reboot.scss */
 kbd {
   padding: 0.2rem 0.4rem;
   font-size: 0.875em;
@@ -328,31 +328,31 @@ kbd {
   border-radius: 0.2rem;
 }
 
-/* line 324, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 324, ../street/static_dev/scss/bootstrap/_reboot.scss */
 kbd kbd {
   padding: 0;
   font-size: 1em;
   font-weight: 700;
 }
 
-/* line 336, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 336, ../street/static_dev/scss/bootstrap/_reboot.scss */
 figure {
   margin: 0 0 1rem;
 }
 
-/* line 343, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 343, ../street/static_dev/scss/bootstrap/_reboot.scss */
 img,
 svg {
   vertical-align: middle;
 }
 
-/* line 353, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 353, ../street/static_dev/scss/bootstrap/_reboot.scss */
 table {
   caption-side: bottom;
   border-collapse: collapse;
 }
 
-/* line 358, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 358, ../street/static_dev/scss/bootstrap/_reboot.scss */
 caption {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -360,13 +360,13 @@ caption {
   text-align: left;
 }
 
-/* line 369, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 369, ../street/static_dev/scss/bootstrap/_reboot.scss */
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
 }
 
-/* line 375, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 375, ../street/static_dev/scss/bootstrap/_reboot.scss */
 thead,
 tbody,
 tfoot,
@@ -378,22 +378,22 @@ th {
   border-width: 0;
 }
 
-/* line 391, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 391, ../street/static_dev/scss/bootstrap/_reboot.scss */
 label {
   display: inline-block;
 }
 
-/* line 398, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 398, ../street/static_dev/scss/bootstrap/_reboot.scss */
 button {
   border-radius: 0;
 }
 
-/* line 408, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 408, ../street/static_dev/scss/bootstrap/_reboot.scss */
 button:focus:not(:focus-visible) {
   outline: 0;
 }
 
-/* line 414, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 414, ../street/static_dev/scss/bootstrap/_reboot.scss */
 input,
 button,
 select,
@@ -405,33 +405,33 @@ textarea {
   line-height: inherit;
 }
 
-/* line 426, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 426, ../street/static_dev/scss/bootstrap/_reboot.scss */
 button,
 select {
   text-transform: none;
 }
 
-/* line 433, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 433, ../street/static_dev/scss/bootstrap/_reboot.scss */
 [role="button"] {
   cursor: pointer;
 }
 
-/* line 437, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 437, ../street/static_dev/scss/bootstrap/_reboot.scss */
 select {
   word-wrap: normal;
 }
 
-/* line 443, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 443, ../street/static_dev/scss/bootstrap/_reboot.scss */
 select:disabled {
   opacity: 1;
 }
 
-/* line 451, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 451, ../street/static_dev/scss/bootstrap/_reboot.scss */
 [list]::-webkit-calendar-picker-indicator {
   display: none;
 }
 
-/* line 460, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 460, ../street/static_dev/scss/bootstrap/_reboot.scss */
 button,
 [type="button"],
 [type="reset"],
@@ -439,7 +439,7 @@ button,
   -webkit-appearance: button;
 }
 
-/* line 467, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 467, ../street/static_dev/scss/bootstrap/_reboot.scss */
 button:not(:disabled),
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -447,18 +447,18 @@ button:not(:disabled),
   cursor: pointer;
 }
 
-/* line 475, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 475, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::-moz-focus-inner {
   padding: 0;
   border-style: none;
 }
 
-/* line 482, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 482, ../street/static_dev/scss/bootstrap/_reboot.scss */
 textarea {
   resize: vertical;
 }
 
-/* line 493, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 493, ../street/static_dev/scss/bootstrap/_reboot.scss */
 fieldset {
   min-width: 0;
   padding: 0;
@@ -466,7 +466,7 @@ fieldset {
   border: 0;
 }
 
-/* line 505, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 505, ../street/static_dev/scss/bootstrap/_reboot.scss */
 legend {
   float: left;
   width: 100%;
@@ -477,18 +477,18 @@ legend {
 }
 
 @media (min-width: 1200px) {
-  /* line 505, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+  /* line 505, ../street/static_dev/scss/bootstrap/_reboot.scss */
   legend {
     font-size: 1.5rem;
   }
 }
 
-/* line 514, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 514, ../street/static_dev/scss/bootstrap/_reboot.scss */
 legend + * {
   clear: left;
 }
 
-/* line 522, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 522, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::-webkit-datetime-edit-fields-wrapper,
 ::-webkit-datetime-edit-text,
 ::-webkit-datetime-edit-minute,
@@ -499,12 +499,12 @@ legend + * {
   padding: 0;
 }
 
-/* line 532, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 532, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::-webkit-inner-spin-button {
   height: auto;
 }
 
-/* line 542, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 542, ../street/static_dev/scss/bootstrap/_reboot.scss */
 [type="search"] {
   outline-offset: -2px;
   -webkit-appearance: textfield;
@@ -518,49 +518,49 @@ legend + * {
   direction: ltr;
 }
 */
-/* line 563, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 563, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-/* line 569, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 569, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::-webkit-color-swatch-wrapper {
   padding: 0;
 }
 
-/* line 576, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 576, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::file-selector-button {
   font: inherit;
 }
 
-/* line 583, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 583, ../street/static_dev/scss/bootstrap/_reboot.scss */
 ::-webkit-file-upload-button {
   font: inherit;
   -webkit-appearance: button;
 }
 
-/* line 590, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 590, ../street/static_dev/scss/bootstrap/_reboot.scss */
 output {
   display: inline-block;
 }
 
-/* line 596, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 596, ../street/static_dev/scss/bootstrap/_reboot.scss */
 iframe {
   border: 0;
 }
 
-/* line 604, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 604, ../street/static_dev/scss/bootstrap/_reboot.scss */
 summary {
   display: list-item;
   cursor: pointer;
 }
 
-/* line 614, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 614, ../street/static_dev/scss/bootstrap/_reboot.scss */
 progress {
   vertical-align: baseline;
 }
 
-/* line 623, ../Proyecto_Street/Street/static_dev/scss/bootstrap/_reboot.scss */
+/* line 623, ../street/static_dev/scss/bootstrap/_reboot.scss */
 [hidden] {
   display: none !important;
 }
