@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block tienda %}
+
+
+<!-- -------------------------------------
+- HEADER DE LA Tienda - Muestra Producto destacado
+------------------------------------- -->
+
+
+<!-- Header-->
+<header class="bg-dark py-1">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Tienda Street</h1>
+            <!-- <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p> -->
+        </div>
+
+        <center><img src="/media/desarrollo/16300420190220_766502_blond-absolu-keglamour-kerastase.jpg"
+                style="width: auto; margin:auto auto" /></center>
+    </div>
+</header>
+
+<!-- -------------------------------------
+- SECTION DE LA Tienda - Listado de productos 
+------------------------------------- -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for producto in page_obj %}
+            <!-- Acá pongo el código HTML para mostrar los productos -->
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Ofertas -->
+                    {% if producto.en_oferta %}
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+                    </div>
+                    {% endif %}
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{producto.imagen.url}}" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{producto.nombre}}</h5>
+                            <!-- Product price-->
+                            {% if producto.en_oferta %} <span class="text-muted text-decoration-line-through">$ {{producto.precio}}</span> $ {{producto.precio_con_descuento}}
+                            <p>Descuento: {{ producto.porc_descuento }}%</p>
+                            {% else %}
+                            $ {{producto.precio}}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Acciones: ACÁ PUEDO AGREGAR BOTONES SEGÚN NECESIDAD (BOTON VER, BOTON AGREGAR AL CARRITO...) -->
+
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                                href="{% url 'producto_detalle' pk=producto.id %}">Ver</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- --------------------------------------------------
+  -      SIDEBAR DE BUSQUEDA
+  -  A IMPLEMENTAR!!!!!
+  ------------------------------------------------------->
+
+
+
+
+<!-- ----------------------------------------------
+BOTONES DE PAGINACION
+---------------------------------------------- -->
+
+<!-- <section>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-5">
+            <li class="page-item disabled">
+                <a class="page-link bg-dark" style="border-color: grey;">Anterior</a>
+            </li>
+            <li class="page-item"><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link bg-dark" style="border-color:grey; color: white;" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link bg-dark" style="border-color: grey; color: white;" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</section> -->
+<section>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center mt-5">
+        <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+          <a class="page-link bg-dark" style="border-color: grey;" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">Anterior</a>
+        </li>
+        {% for num in page_obj.paginator.page_range %}
+        <li style="border-color: grey" class="page-item bg-dark {% if num == page_obj.number %}active{% endif %}" >
+          <a style="border-color: grey" class="page-link bg-dark " href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+      
+        <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+          <a class="page-link bg-dark" style="border-color: grey;" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Siguiente</a>
+        </li>
+      </ul>
+    </nav>
+  </section>
+
+
+{% endblock tienda %}

@@ -57,12 +57,12 @@ class ProveedorAdmin(admin.ModelAdmin):
 class ProductoAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Descripcion", {"fields": ['nombre', 'descripcion', 'imagen']}),
-        ("Precio - Stock", {"fields": ['precio', 'stock', 'stock_min']}),
+        ("Precio - Stock", {"fields": ['estado','precio', 'en_oferta', 'porc_descuento', 'stock', 'stock_min']}),
         ("Proveedor", {"fields": ["proveedor"]}),
         ("Categoría", {"fields": ["categoria"]}),
     ]
     list_display = ["nombre", "precio", "stockProducto",
-                    "categoria", "proveedor", "imagenProducto"]
+                    "categoria", "proveedor", "imagenProducto","en_oferta", "porc_descuento", "estadoProducto"]
     ordering = ['nombre']
     list_filter = ['categoria', 'proveedor', 'nombre', 'fecha_creacion']
     search_fields = ['nombre', 'proveedor', 'categoria']
@@ -82,6 +82,21 @@ class ProductoAdmin(admin.ModelAdmin):
             return format_html('<span style="background-color: red; padding:7px;">{}</span>', obj.stock,)
         if obj.stock > obj.stock_min:
             return format_html('<span style="background-color: green; padding:7px;">{}</span>', obj.stock,)
+
+    @admin.display(description="Estado")
+    def estadoProducto(self, obj):
+        '''
+        me devuelve en color rojo si el producto está "eliminado"
+        me devuelve en color amarillo el producto está "pausado"
+        me devuelve en color verde el producto está "activo"
+
+        '''
+        if obj.estado == "pausado":
+            return format_html('<span style="background-color: yellow; color:black; padding:7px;">{}</span>', obj.estado,)
+        if obj.estado == "eliminado":
+            return format_html('<span style="background-color: red; padding:7px;">{}</span>', obj.estado,)
+        if obj.estado == "activo":
+            return format_html('<span style="background-color: green; padding:7px;">{}</span>', obj.estado,)
 
     @admin.display(description="Imagen")
     def imagenProducto(self, obj):
