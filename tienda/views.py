@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
+from django.views.generic import View
 
 
 from .models import Producto
@@ -16,8 +17,29 @@ def tienda_producto(request):
     return render(request, 'tienda/producto.html')
 
 
-# def carrito(request):
-#     return render(request, 'tienda/cart.html')
+def carrito(request):
+    
+    carrito = request.session.get('carrito', {})
+    productos = []
+    total = 0
+
+    for clave, cantidad in carrito.items():
+        if clave.startswith('street_producto_'):
+            producto_id = clave.split('_')[-1]
+            try:
+                producto = Producto.objects.get(id=producto_id)
+                if producto.en_oferta:    
+                    precio = producto.precio - (producto.precio * producto.porc_descuento / 100)
+                else:
+                    precio = producto.precio
+
+                subtotal = precio * cantidad
+                total += subtotal
+                productos.append({'producto': producto, 'cantidad': cantidad, 'precio': precio, 'subtotal': subtotal, 'nombre': producto.nombre, 'imagen': producto.imagen, "categoria": producto.categoria})
+            except Producto.DoesNotExist:
+                pass
+    return render(request, 'tienda/cart.html', {'productos': productos, 'total': total})
+
 
 ######################################################
 ####   TIENDA INDEX ORIGINAL QUE FUNCIONA BIEN    ####
@@ -36,10 +58,10 @@ def tienda_producto(request):
 #     context = {'page_obj': page_obj}
 #     return render(request, 'tienda/lista_productos.html', context)
 
-# def producto_detalle(request, pk):
-#     producto = get_object_or_404(Producto, pk=pk)
-#     producto.precio_con_descuento = producto.precio - (producto.precio * producto.porc_descuento / 100)
-#     return render(request, 'tienda/producto.html', {'producto': producto})
+def producto_detalle(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    producto.precio_con_descuento = producto.precio - (producto.precio * producto.porc_descuento / 100)
+    return render(request, 'tienda/producto.html', {'producto': producto})
 
 
 

@@ -11,60 +11,65 @@
 
 <!-- Header-->
 <header class="bg-dark py-1">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Tienda Street</h1>
-            <!-- <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p> -->
-        </div>
-
-        <center><img src="/media/desarrollo/16300420190220_766502_blond-absolu-keglamour-kerastase.jpg"
-                style="width: auto; margin:auto auto" /></center>
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Tienda Street</h1>
+      <!-- <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p> -->
     </div>
+
+    <center><img src="/media/desarrollo/16300420190220_766502_blond-absolu-keglamour-kerastase.jpg"
+        style="width: auto; margin:auto auto" /></center>
+  </div>
 </header>
 
 <!-- -------------------------------------
 - SECTION DE LA Tienda - Listado de productos 
 ------------------------------------- -->
 <section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            {% for producto in page_obj %}
-            <!-- Acá pongo el código HTML para mostrar los productos -->
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <!-- Ofertas -->
-                    {% if producto.en_oferta %}
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
-                    </div>
-                    {% endif %}
-                    <!-- Product image-->
-                    <img class="card-img-top" src="{{producto.imagen.url}}" alt="..." />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">{{producto.nombre}}</h5>
-                            <!-- Product price-->
-                            {% if producto.en_oferta %} <span class="text-muted text-decoration-line-through">$ {{producto.precio}}</span> $ {{producto.precio_con_descuento}}
-                            <p>Descuento: {{ producto.porc_descuento }}%</p>
-                            {% else %}
-                            $ {{producto.precio}}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <!-- Acciones: ACÁ PUEDO AGREGAR BOTONES SEGÚN NECESIDAD (BOTON VER, BOTON AGREGAR AL CARRITO...) -->
-
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                href="{% url 'producto_detalle' pk=producto.id %}">Ver</a></div>
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar al Carrito</a>
-                        </div>
-                    </div>
-                </div>
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      {% for producto in page_obj %}
+      <!-- Acá pongo el código HTML para mostrar los productos -->
+      <div class="col mb-5">
+        <div class="card h-100">
+          <!-- Ofertas -->
+          {% if producto.en_oferta %}
+          <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta
+          </div>
+          {% endif %}
+          <!-- Product image-->
+          <img class="card-img-top" src="{{producto.imagen.url}}" alt="..." />
+          <!-- Product details-->
+          <div class="card-body p-4">
+            <div class="text-center">
+              <!-- Product name-->
+              <h5 class="fw-bolder">{{producto.nombre}}</h5>
+              <!-- Product price-->
+              {% if producto.en_oferta %} <span class="text-muted text-decoration-line-through">$
+                {{producto.precio}}</span> $ {{producto.precio_con_descuento}}
+              <p>Descuento: {{ producto.porc_descuento }}%</p>
+              {% else %}
+              $ {{producto.precio}}
+              {% endif %}
             </div>
-            {% endfor %}
+          </div>
+          <!-- Acciones: ACÁ PUEDO AGREGAR BOTONES SEGÚN NECESIDAD (BOTON VER, BOTON AGREGAR AL CARRITO...) -->
+
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent d-flex justify-content-between">
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto"
+                href="{% url 'producto_detalle' pk=producto.id %}">Ver</a></div>
+            <div class="text-center">
+              <input type="submit" hidden class="col-12 vervalor" value="1" />
+              <input type="submit" hidden class="col-12 verid" value="street_producto_{{producto.id}}" />
+              <!-- <button type="button" class="btn btn-primary agregar">{{producto.id}}agregar</button> -->
+              <a class="btn btn-outline-dark mt-auto agregar" href="#">Agregar al Carrito</a>
+            </div>  
+          </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
+  </div>
 </section>
 
 
@@ -99,23 +104,123 @@ BOTONES DE PAGINACION
     </nav>
 </section> -->
 <section>
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center mt-5">
-        <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-          <a class="page-link bg-dark" style="border-color: grey;" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">Anterior</a>
-        </li>
-        {% for num in page_obj.paginator.page_range %}
-        <li style="border-color: grey" class="page-item bg-dark {% if num == page_obj.number %}active{% endif %}" >
-          <a style="border-color: grey" class="page-link bg-dark " href="?page={{ num }}">{{ num }}</a>
-        </li>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-5">
+      <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+        <a class="page-link bg-dark" style="border-color: grey;"
+          href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">Anterior</a>
+      </li>
+      {% for num in page_obj.paginator.page_range %}
+      <li style="border-color: grey" class="page-item bg-dark {% if num == page_obj.number %}active{% endif %}">
+        <a style="border-color: grey" class="page-link bg-dark " href="?page={{ num }}">{{ num }}</a>
+      </li>
       {% endfor %}
-      
-        <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-          <a class="page-link bg-dark" style="border-color: grey;" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Siguiente</a>
-        </li>
-      </ul>
-    </nav>
-  </section>
 
-
+      <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+        <a class="page-link bg-dark" style="border-color: grey;"
+          href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+</section>
 {% endblock tienda %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<!--Incorporo la libreria jscookie para que Cookies.ger no me de error -->
+
+<script = "text/javascript">
+/*jslint browser: true*/
+/*jslint plusplus: true*/
+/*global FormData: false*/
+/*global $, jQuery, alert, console*/
+/* PARA VALIDAR LOS DATOS */
+var csrftoken = Cookies.get('csrftoken');
+function csrfSafeMethod(method) {
+    "use strict";
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+function AgregarProducto(producto_id, valor_actual, valor_a_agregar) {
+    "use strict";
+
+    // console.log(cada_producto_id, valor)
+    $.ajax({
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      },
+      url: "/tienda/agregar/",
+      type: "GET",
+      data: { producto_id: producto_id, valor_actual: valor_actual, valor_a_agregar: valor_a_agregar },
+      success: function (json) {
+        console.log("----------------------------------")
+        console.log("Producto actualizado en el Localstorage: ", json[0].idproducto.toString())
+        console.log("Nueva Cantidad del Producto en el LocalStorage: ", json[0].cantidad.toString())
+        localStorage.setItem(json[0].idproducto.toString(), json[0].cantidad.toString());
+        //location.reload();
+        console.log("----------------------------------")
+      },
+      error: function (xhr, errmsg, err) {
+        console.log('Error en carga de respuesta')
+      }
+    });
+}
+  
+$('.agregar').click(function (event) {
+    "use strict";
+    event.preventDefault();
+    console.clear()
+    let valor_actual = "0"
+    let producto_id = $(this).parent().find('.verid').val();
+    let valor_a_agregar = $(this).parent().find('.vervalor').val();
+    console.log("hice click en el producto:", producto_id);
+    // console.log("que tiene un valor de:", valor);
+
+    // PASO 1: Elimino todo item que no empiece con street_producto_
+    let i;
+    console.log("ELIMINANDO OTRAS CLAVES DEL LOCALSTORAGE:")
+    for (i = 0; i < localStorage.length; i++) {
+      let clave_eliminar = localStorage.key(i);
+      // console.log(typeof clave_eliminar);
+      console.log("---------clave a eliminar:", clave_eliminar);
+      if (!clave_eliminar.startsWith("street_producto_")) {
+        // console.log("Retorna no Verdadero!!!!!!");
+        console.log("---------Se eliminará la clave:", clave_eliminar);
+        localStorage.removeItem(clave_eliminar);
+      }
+      else {
+        console.log("---------No se eliminará la clave:", clave_eliminar);
+      }
+    }
+
+    // PASO 2: Si es la primera vez que selecciono el producto me quedo con "valor=1"
+    // Si ya existia un valor en la base tomo ese valor en lugar de 1
+
+    for (i = 0; i < localStorage.length; i++) {
+      let clave = localStorage.key(i);
+      valor_actual = localStorage[clave];
+      console.log("IF", clave, "==", producto_id)
+      if (clave == producto_id) {
+        console.log("----- Se encontró el producto en el LocalStorage -----")
+        console.log("Key en el LocalStorage: ", clave);
+        console.log("Cantidad ACTUAL en el LocalStorage: ", valor_actual);
+        break;
+        console.log("----------------------------------------------------")
+      } else {
+        console.log("No se encontró el producto en el LocalStorage");
+        valor_actual = 0;
+      }
+    }
+    console.log("Llamando a AgregarProducto: ")
+    console.log("ProductoID:", producto_id)
+    console.log("Valor Actual:", valor_actual)
+    console.log("Valor a agregar:", valor_a_agregar)
+    AgregarProducto(producto_id, valor_actual, valor_a_agregar); // valor es la cantidad de ese producto a agregar al pedido  
+  });
+
+</script>
+{% endblock scripts %}
+
