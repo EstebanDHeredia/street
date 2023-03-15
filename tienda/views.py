@@ -35,7 +35,7 @@ def carrito(request):
 
                 subtotal = precio * cantidad
                 total += subtotal
-                productos.append({'producto': producto, 'cantidad': cantidad, 'precio': precio, 'subtotal': subtotal, 'nombre': producto.nombre, 'imagen': producto.imagen, "categoria": producto.categoria})
+                productos.append({'producto': producto, 'cantidad': cantidad, 'precio': precio, 'subtotal': subtotal, 'nombre': producto.nombre, 'imagen': producto.imagen, "categoria": producto.categoria, "id": producto.id})
             except Producto.DoesNotExist:
                 pass
     return render(request, 'tienda/cart.html', {'productos': productos, 'total': total})

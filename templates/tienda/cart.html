@@ -32,24 +32,24 @@
                                         </span>xxxx</p> {% endcomment %}
                                 </div>
                                 <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                    <button class="btn btn-link px-2"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                        <i class="fas fa-minus"></i>
+                                    <input type="submit" hidden class="col-12 verid" value="street_producto_{{producto.id}}" />
+                                    <button class="btn btn-link px-2 decrecer">
+                                            <i class="fas fa-minus"></i>
                                     </button>
 
-                                    <input id="form1" min="0" name="quantity" value="{{producto.cantidad}}" type="number"
-                                        class="form-control form-control-sm" />
+                                    <input id="form1_{{producto.id}}" min="0" name="quantity" value="{{producto.cantidad}}" type="number"
+                                            class="form-control form-control-sm vervalor" />
 
-                                    <button class="btn btn-link px-2"
-                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                        <i class="fas fa-plus"></i>
+                                    <button class="btn btn-link px-2 aumentar">
+                                            <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                    <h5 class="mb-0">${{producto.subtotal}}</h5>
+                                        <input type="submit" hidden id="precio_{{producto.id}}" class="col-12" value="{{producto.precio}}" />
+                                        <h5 class="mb-0" id="subtotal_{{producto.id}}">${{producto.subtotal}}</h5>
                                 </div>
                                 <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                    <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                                        <a href="#!" class="text-danger eliminar"><i class="fas fa-trash fa-lg"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -186,3 +186,216 @@
 </section>
 
 {% endblock tienda %}
+
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<!--Incorporo la libreria jscookie para que Cookies.ger no me de error -->
+
+<script = "text/javascript">
+/*jslint browser: true*/
+/*jslint plusplus: true*/
+/*global FormData: false*/
+/*global $, jQuery, alert, console*/
+/* PARA VALIDAR LOS DATOS */
+var csrftoken = Cookies.get('csrftoken');
+function csrfSafeMethod(method) {
+    "use strict";
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+function AgregarProducto(producto_id, valor_actual, valor_a_agregar) {
+    "use strict";
+
+    // console.log(cada_producto_id, valor)
+    $.ajax({
+      beforeSend: function (xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      },
+      url: "/tienda/agregar/",
+      type: "GET",
+      data: { producto_id: producto_id, valor_actual: valor_actual, valor_a_agregar: valor_a_agregar },
+      success: function (json) {
+        console.log("----------------------------------")
+        console.log("Producto actualizado en el Localstorage: ", json[0].idproducto.toString())
+        console.log("Nueva Cantidad del Producto en el LocalStorage: ", json[0].cantidad.toString())
+
+        var cantidad = json[0].cantidad;
+        if (cantidad > 0) {
+            localStorage.setItem(json[0].idproducto.toString(), json[0].cantidad.toString());
+            var id_producto = json[0].idproducto.split("_")[2];
+            $("#form1_" + id_producto).val(json[0].cantidad.toString()); // Actualizo el valor del input
+            
+            var cantidad = json[0].cantidad;
+            var precio = parseFloat( $('#precio_'+id_producto).val() );
+            var subtotal = precio * cantidad;        
+            console.log(cantidad, precio, subtotal);
+            $('#subtotal_'+id_producto).text('$' + subtotal.toFixed(2));
+            //location.reload();
+            console.log("----------------------------------")            
+        } else {
+            localStorage.removeItem(json[0].idproducto.toString());
+            location.reload();
+        }
+
+      },
+      error: function (xhr, errmsg, err) {
+        console.log('Error en carga de respuesta')
+      }
+    });
+}
+
+$('.vervalor').on("input", function(event) {
+    "use strict";
+    event.preventDefault();
+    console.clear()
+
+    // Obtener el valor actualizado del input
+    const valor = event.target.value;
+    // Actualizar el atributo "value" del input
+    $(this).attr("value", valor);
+
+    let producto_id = $(this).parent().find('.verid').val();
+
+    console.log("=======PARAMETROS A ENVIAR A AgregarProducto========", producto_id, 0, valor)
+    AgregarProducto(producto_id, 0, valor);
+});
+
+
+// FUNCION QUE ELIMINA UN PRODUCTO DEL CARRITO AL HACER CLIC EN EL BOTON DEL BASURERO
+$('.eliminar').click(function(event){
+    "use strict";
+    event.preventDefault();
+    //console.clear();
+    let producto_id = $(this).parent().parent().find('.verid').val();
+    let i;
+    for (i = 0; i < localStorage.length; i++) {
+        let clave_eliminar = localStorage.key(i);
+        console.log(clave_eliminar + " == " + producto_id + "????????")
+        if (clave_eliminar == producto_id) {
+          console.log("-----------Se eliminará la clave:", clave_eliminar);
+          localStorage.removeItem(clave_eliminar);
+        }
+    }
+    console.log("=======PARAMETROS A ENVIAR A AgregarProducto========", producto_id, 0, 0 )
+    AgregarProducto(producto_id, 0, 0);
+
+});
+
+// FUNCION QUE SE EJECUTAR AL HACER CLIC EN EL BOTON "+" DE UN PRODUCTO
+$('.aumentar').click(function (event) {
+    "use strict";
+    event.preventDefault();
+    console.clear()
+    let valor_actual;
+    let producto_id = $(this).parent().find('.verid').val();
+    let valor_a_agregar = 1;
+    console.log("hice click en el producto:", producto_id);
+    console.log("que tiene un valor A AGREGAR de:", valor_a_agregar);
+
+    // PASO 1: Elimino todo item que no empiece con street_producto_
+    let i;
+    console.log("ELIMINANDO OTRAS CLAVES DEL LOCALSTORAGE:")
+    for (i = 0; i < localStorage.length; i++) {
+      let clave_eliminar = localStorage.key(i);
+      // console.log(typeof clave_eliminar);
+      console.log("-----------clave a eliminar:", clave_eliminar);
+      if (!clave_eliminar.startsWith("street_producto_")) {
+        // console.log("Retorna no Verdadero!!!!!!");
+        console.log("-----------Se eliminará la clave:", clave_eliminar);
+        localStorage.removeItem(clave_eliminar);
+      }
+      else {
+        console.log("-----------No se eliminará la clave:", clave_eliminar);
+        valor_actual = 0;
+      }
+    }
+
+    // PASO 2: Busco el valor del producto en el localStorage (SI YA ESTÁ EN EL PEDIDO):
+
+    for (i = 0; i < localStorage.length; i++) {
+      let clave = localStorage.key(i);
+      console.log("=============VALOR ACTUAL EN LOCALSTORAGE=======", localStorage[clave])
+      valor_actual = localStorage[clave]; // VALOR ACTUAL DEL PRODUCTO EN EL PEDIDO(LOCALSTORAGE)
+      if (clave == producto_id) {
+        console.log("----- Se encontró el producto en el LocalStorage -----")
+        console.log("Key en el LocalStorage: ", clave);
+        console.log("Cantidad ACTUAL en el LocalStorage: ", valor_actual);
+        console.log("----------------------------------------------------")
+        break;
+      } else {
+        console.log("No se encontró el producto en el LocalStorage");
+        valor_actual = 0
+      }
+    }
+    console.log("=======PARAMETROS A ENVIAR A AgregarProducto========", producto_id, valor_actual, valor_a_agregar )
+    AgregarProducto(producto_id, valor_actual, valor_a_agregar);
+});
+
+// FUNCION QUE SE EJECUTAR AL HACER CLIC EN EL BOTON "-" DE UN PRODUCTO
+$('.decrecer').click(function (event) {
+    "use strict";
+    event.preventDefault();
+    console.clear()
+    var input = $(this).parent().find('.vervalor');
+    var valor = input.val();
+    console.log("····························", valor);
+    if (parseInt(valor) > 0) {
+      //input.stepDown();
+      this.parentNode.querySelector('input[type=number]').stepDown();
+    } else {
+        $(this).siblings('.vervalor').val(0);
+        return;
+    }
+    let valor_actual;
+    let producto_id = $(this).parent().find('.verid').val();
+    let valor_a_agregar = -1;
+    console.log("hice click en el producto:", producto_id);
+    console.log("que tiene un valor A AGREGAR de:", valor_a_agregar);
+
+    // PASO 1: Elimino todo item que no empiece con street_producto_
+    let i;
+    console.log("ELIMINANDO OTRAS CLAVES DEL LOCALSTORAGE:")
+    for (i = 0; i < localStorage.length; i++) {
+      let clave_eliminar = localStorage.key(i);
+      // console.log(typeof clave_eliminar);
+      console.log("-----------clave a eliminar:", clave_eliminar);
+      if (!clave_eliminar.startsWith("street_producto_")) {
+        // console.log("Retorna no Verdadero!!!!!!");
+        console.log("-----------Se eliminará la clave:", clave_eliminar);
+        localStorage.removeItem(clave_eliminar);
+      }
+      else {
+        console.log("-----------No se eliminará la clave:", clave_eliminar);
+        valor_actual = 0;
+      }
+    }
+
+    // PASO 2: Busco el valor del producto en el localStorage (SI YA ESTÁ EN EL PEDIDO):
+
+    for (i = 0; i < localStorage.length; i++) {
+      let clave = localStorage.key(i);
+      console.log("=============VALOR ACTUAL EN LOCALSTORAGE=======", localStorage[clave])
+      valor_actual = localStorage[clave]; // VALOR ACTUAL DEL PRODUCTO EN EL PEDIDO(LOCALSTORAGE)
+      if (clave == producto_id) {
+        console.log("----- Se encontró el producto en el LocalStorage -----")
+        console.log("Key en el LocalStorage: ", clave);
+        console.log("Cantidad ACTUAL en el LocalStorage: ", valor_actual);
+        console.log("----------------------------------------------------")
+        break;
+      } else {
+        console.log("No se encontró el producto en el LocalStorage");
+        valor_actual = 0
+      }
+    }
+    console.log("=======PARAMETROS A ENVIAR A AgregarProducto========", producto_id, valor_actual, valor_a_agregar )
+    AgregarProducto(producto_id, valor_actual, valor_a_agregar);
+});
+
+
+
+</script>
+{% endblock scripts %}

@@ -16,17 +16,21 @@ def agregar_producto(request, *args, **kwargs):
 
         if int(valor_actual)+int(valor_a_agregar) > stock_actual:
             print("supero el valor en stock, no se puede agregar mas productos")
-            cantidad = int(valor_actual)
+            cantidad = stock_actual
         else:
             cantidad = int(valor_actual) + int(valor_a_agregar)
         
         '''
         ACTUALIZO VARIABLE DE SESION
         '''
+        if cantidad > 0:
+            # Si la cantidad del producto es mayor que cero lo actualizo en el carro
+            carro[idproducto] = cantidad
+        else:
+            # si la cantidad es cero lo elimino del carrito de compras:
+            del carro[idproducto]
 
-        carro[idproducto] = cantidad
         request.session["carrito"] = carro
-
         '''
         FIN
         '''
