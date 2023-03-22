@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block turnero %}
+
+<div id='calendario'></div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+      // Inicializar el calendario
+      $('#calendario').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView: 'month',
+        editable: false,
+        eventLimit: true, // Permite que haya más eventos de los que se pueden mostrar en una casilla del calendario
+        height: '100%', // ajusta la altura del calendario al 100% del tamaño de la ventana del navegador
+        contentHeight: $(window).height() - 200, // Ajusta según tus necesidades
+        events: [
+          {% for turno in turnos %}
+          
+          {
+            title: '{{ turno.cliente }}',
+            start: '{{ turno.fecha }} {{ turno.get_horario_display|slice:"0:5" }}',
+            end: '{{ turno.fecha }} {{ turno.get_horario_display|slice:"8:13" }}',
+            color: '{% if turno.estado == "pendiente" %}#FFC107{% elif turno.estado == "atendido" %}#4CAF50{% elif turno.estado == "cancelado" %}#F44336{% endif %}',
+            {% comment %}url: '{% url "detalle_turno" turno.id %}' {% endcomment %}
+          },
+
+          {% endfor %}
+        ]
+      });
+
+    });
+</script>
+<style>
+    #calendario {
+        width: 70%;
+        margin: 0 auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+</style>
+
+{% endblock %}
+  

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Apps de terceros
     'captcha',
 
+
     # Mis Aplicaciones:
     'blog.apps.BlogConfig',
     'usuarios.apps.UsuariosConfig',

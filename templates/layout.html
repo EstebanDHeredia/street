@@ -52,7 +52,8 @@
                   {% if request.user.is_authenticated and request.user.is_active %}
                   {% if request.user.is_staff or request.user.is_superuser %}
                   <li><a class="dropdown-item" href='{% url "admin:index" %}'>Admin Panel</a></li>
-                  <li><a class="dropdown-item" href='{% url "turnero_index" %}'>Turnero</a></li>
+                  <!---->
+                  <li><a class="dropdown-item" href='{% url "turnero_empleado" empleado_id=1 %}'>Turnero</a></li>
                   <li><a class="dropdown-item" href='{% url "ordenes_index" %}'>Ordenes Diarias</a></li>
                   {% endif %}
                   {% endif %}
@@ -94,6 +95,7 @@
 {% block producto %} {% endblock %}
 {% block galeria %} {% endblock %}
 {% block servicios %} {% endblock %}
+{% block turnero %} {% endblock %}
 {% block mensaje %} {% endblock %}
 
 

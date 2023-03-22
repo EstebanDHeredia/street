@@ -37,7 +37,7 @@ class Empleado(models.Model):
     valor_hora = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self) -> str:
-        return self.usuarios.first_name + " " + self.usuarios.last_name
+        return self.usuario.first_name + " " + self.usuario.last_name
 
 class Servicio(models.Model):
     """

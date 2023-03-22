@@ -18,20 +18,27 @@
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}" />
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}" /> -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
 
+  <!-- FullCalendar CSS -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+
   <title>Street Peluqueria</title>
+
 </head>
 
 <body>
+
   {% block content %}{% endblock %}
   {% block logout %} {% endblock %}
   {% block ver_productos %}{% endblock %}
   <!-- jQuery para produccion -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  {% block scripts %}
-  {% endblock %}
+  <!-- FullCalendar JS -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+  {% block scripts %} {% endblock %}
 </body>
 
 </html>
