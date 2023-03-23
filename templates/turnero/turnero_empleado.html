@@ -1,53 +1,87 @@
 {% extends "layout.html" %}
 {% load i18n %}
-
-{% block turnero %}
-
-<div id='calendario'></div>
+{% load static %}
 
 
-{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fullcalendar/lib/main.css' %}">
+
+.dropdown-container {
+  display: flex;
+  justify-content: center;
+}
+{% endblock extra_css%}
+
 
 {% block scripts %}
-<script>
-    $(document).ready(function() {
-      // Inicializar el calendario
-      $('#calendario').fullCalendar({
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        defaultView: 'month',
-        editable: false,
-        eventLimit: true, // Permite que haya más eventos de los que se pueden mostrar en una casilla del calendario
-        height: '100%', // ajusta la altura del calendario al 100% del tamaño de la ventana del navegador
-        contentHeight: $(window).height() - 200, // Ajusta según tus necesidades
-        events: [
-          {% for turno in turnos %}
-          
-          {
-            title: '{{ turno.cliente }}',
-            start: '{{ turno.fecha }} {{ turno.get_horario_display|slice:"0:5" }}',
-            end: '{{ turno.fecha }} {{ turno.get_horario_display|slice:"8:13" }}',
-            color: '{% if turno.estado == "pendiente" %}#FFC107{% elif turno.estado == "atendido" %}#4CAF50{% elif turno.estado == "cancelado" %}#F44336{% endif %}',
-            {% comment %}url: '{% url "detalle_turno" turno.id %}' {% endcomment %}
-          },
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script src="{% static 'fullcalendar/lib/main.js' %}"></script>
+<script src="{% static 'fullcalendar/lib/locales-all.js' %}"></script>
 
-          {% endfor %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendario');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: "bootstrap5",
+
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+      },
+      locale: 'es',
+      events: [
+        {% for turno in turnos %}
+          {
+          title: '{{ turno.cliente }}',
+          empleado: '{{ turno.empleado }}',
+          start: '{{ turno.fecha|date:"Y-m-d" }} {{ turno.get_horario_display|slice:"0:5" }}',
+          end: '{{ turno.fecha }} {{ turno.get_horario_display|slice:"8:13" }}',
+          color: '{% if turno.estado == "pendiente" %}#FFC107{% elif turno.estado == "atendido" %}#4CAF50{% elif turno.estado == "cancelado" %}#F44336{% endif %}',
+          // editable: true,
+          display: 'block',
+          },
+        {% endfor %}
         ]
       });
 
+    // Agregar el dropdown de empleados
+    var empleados = [];
+    {% for turno in turnos %}
+      empleados.push('{{ turno.empleado }}');
+    {% endfor %}
+    empleados = Array.from(new Set(empleados)); // Eliminar empleados duplicados
+    var dropdown = '<div class="dropdown-container" style="display: flex; justify-content: center; margin-top: 20px;"> <select id="empleadoDropdown">';
+    dropdown += '<option value="">Seleccionar empleado...</option>';
+    empleados.forEach(function(empleado) {
+      dropdown += '<option value="' + empleado + '">' + empleado + '</option>';
     });
+    dropdown += '</select></div>';
+    $('#calendario').before(dropdown);
+
+    // Filtrar los turnos al cambiar la selección del dropdown
+    $('#empleadoDropdown').change(function() {
+      var empleado = $(this).val();
+      if (empleado) {
+        var eventosFiltrados = calendar.getEvents().filter(function(evento) {
+          return evento.extendedProps.empleado === empleado;
+        });
+        calendar.removeAllEvents();
+        calendar.addEventSource(eventosFiltrados);
+      } else {
+        calendar.refetchEvents();
+      }
+    });
+
+    calendar.render();
+  });
 </script>
-<style>
-    #calendario {
-        width: 70%;
-        margin: 0 auto;
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-</style>
 
 {% endblock %}
-  
+
+{% block turnero %}
+
+<div id='calendario' class="container" style="padding: 20px;"></div>
+
+{% endblock %}

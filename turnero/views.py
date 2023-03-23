@@ -66,11 +66,28 @@ def turnero_index(request):
 
 def turnero_empleado(request, empleado_id):
     # Obtener los turnos del empleado
+    empleados = Empleado.objects.all()
+    # print(empleados)
     turnos = Turno.objects.filter(empleado__id=empleado_id)
 
     # Pasar los turnos al contexto para su uso en el template
     context = {
         'turnos': turnos,
+        'empleados': empleados,
     }
+    print(context)
+    return render(request, 'turnero/turnero_empleado.html', context)
 
+def turnero(request):
+    # Obtener los turnos del empleado
+    empleados = Empleado.objects.all()
+    # print(empleados)
+    turnos = Turno.objects.all()
+
+    # Pasar los turnos al contexto para su uso en el template
+    context = {
+        'turnos': turnos,
+        'empleados': empleados,
+    }
+    print(context)
     return render(request, 'turnero/turnero_empleado.html', context)
