@@ -6,82 +6,110 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'fullcalendar/lib/main.css' %}">
 
-.dropdown-container {
-  display: flex;
-  justify-content: center;
-}
 {% endblock extra_css%}
 
 
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <script src="{% static 'fullcalendar/lib/main.js' %}"></script>
 <script src="{% static 'fullcalendar/lib/locales-all.js' %}"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var calendarEl = document.getElementById('calendario');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      themeSystem: "bootstrap5",
 
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-      },
-      locale: 'es',
-      events: [
-        {% for turno in turnos %}
-          {
-          title: '{{ turno.cliente }}',
-          empleado: '{{ turno.empleado }}',
-          start: '{{ turno.fecha|date:"Y-m-d" }} {{ turno.get_horario_display|slice:"0:5" }}',
-          end: '{{ turno.fecha }} {{ turno.get_horario_display|slice:"8:13" }}',
-          color: '{% if turno.estado == "pendiente" %}#FFC107{% elif turno.estado == "atendido" %}#4CAF50{% elif turno.estado == "cancelado" %}#F44336{% endif %}',
-          // editable: true,
-          display: 'block',
-          },
-        {% endfor %}
-        ]
-      });
-
-    // Agregar el dropdown de empleados
-    var empleados = [];
-    {% for turno in turnos %}
-      empleados.push('{{ turno.empleado }}');
-    {% endfor %}
-    empleados = Array.from(new Set(empleados)); // Eliminar empleados duplicados
-    var dropdown = '<div class="dropdown-container" style="display: flex; justify-content: center; margin-top: 20px;"> <select id="empleadoDropdown">';
-    dropdown += '<option value="">Seleccionar empleado...</option>';
-    empleados.forEach(function(empleado) {
-      dropdown += '<option value="' + empleado + '">' + empleado + '</option>';
-    });
-    dropdown += '</select></div>';
-    $('#calendario').before(dropdown);
-
-    // Filtrar los turnos al cambiar la selección del dropdown
-    $('#empleadoDropdown').change(function() {
-      var empleado = $(this).val();
-      if (empleado) {
-        var eventosFiltrados = calendar.getEvents().filter(function(evento) {
-          return evento.extendedProps.empleado === empleado;
-        });
-        calendar.removeAllEvents();
-        calendar.addEventSource(eventosFiltrados);
-      } else {
-        calendar.refetchEvents();
-      }
-    });
-
-    calendar.render();
+  // Agregar el dropdown de empleados
+  var empleados = [];
+  {% for empleado in empleados %}
+    empleados.push('{{ empleado }}');
+  {% endfor %}
+  // empleados = Array.from(new Set(empleados)); // Eliminar empleados duplicados
+  var dropdown = '<div class="dropdown-container" style="display: flex; justify-content: center; margin-top:30px; padding-bottom: 50px"><strong>Seleccionar empleado...</strong> <select id="empleadoDropdown">';
+  // dropdown += '<option value="">Seleccionar empleado...</option>';
+  empleados.forEach(function(empleado) {
+    dropdown += '<option value="' + empleado + '">' + empleado + '</option>';
   });
+  dropdown += '</select></div>';
+  $('#calendario').before(dropdown);
+
+  // FUNCION QUE CARGA LOS TURNOS EN EL CALENDARIO DE ACUERDO AL EMPLEADO SELECCIONADO
+  function cargarCalendario(empleadoSeleccionado) {
+  var calendarEl = document.getElementById('calendario');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    themeSystem: "bootstrap5",
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+    },
+
+    locale: 'es',
+    events: [
+      {% for turno in turnos %}
+        {
+        title: '{{ turno.cliente }}',
+        description: '{{ turno.servicio }}',
+        empleado: '{{ turno.empleado }}',
+        start: '{{ turno.fecha|date:"Y-m-d" }} {{ turno.get_horario_inicio_display|slice:"0:5" }}',
+        end: '{{ turno.fecha|date:"Y-m-d" }} {{ turno.get_horario_fin_display|slice:"0:5" }}',
+        color: '{% if turno.estado == "pendiente" %}#FFC107{% elif turno.estado == "atendido" %}#4CAF50{% elif turno.estado == "cancelado" %}#F44336{% endif %}',
+        display: 'block',
+        },
+      {% endfor %}
+      ],
+      
+      eventTimeFormat: { // like '14:30:00'
+      hour: '2-digit',
+      minute: '2-digit',
+      meridiem: false
+    },
+
+    eventDidMount: function(info) {
+      $(info.el).tooltip({
+        title: info.event.extendedProps.description,
+        placement: 'top',
+        trigger: 'hover',
+        container: 'body'
+      });
+    },
+  });
+
+    // Filtrar los eventos según el empleado seleccionado en el dropdown
+    if (empleadoSeleccionado) {
+    var eventosFiltrados = calendar.getEvents().filter(function(evento) {
+      return evento.extendedProps.empleado === empleadoSeleccionado;
+    });
+    calendar.removeAllEvents();
+    calendar.addEventSource(eventosFiltrados);
+  }
+
+  calendar.render();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var empleadoSeleccionado = $('#empleadoDropdown').val();
+  cargarCalendario(empleadoSeleccionado);
+
+  // Asociar el evento 'change' al dropdown
+  $('#empleadoDropdown').change(function() {
+    var empleadoSeleccionado = $(this).val();
+    cargarCalendario(empleadoSeleccionado);
+  });
+});
+
+
 </script>
 
 {% endblock %}
 
 {% block turnero %}
+<div id='calendario'></div>
+<style>
 
-<div id='calendario' class="container" style="padding: 20px;"></div>
 
+#calendario {
+  height: 70vh;
+}
+  </style>
 {% endblock %}

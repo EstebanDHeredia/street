@@ -81,7 +81,9 @@ def enviar_mensaje(request):
             nuevo_mensaje.save()
 
             # return redirect('blog:index')
-            return render(request,"blog/mensaje_enviado.html")
+            mensaje_enviado = True
+            return render(request, 'blog/index.html', {'mensaje_enviado': mensaje_enviado})
+            # return render(request,"blog/mensaje_enviado.html")
         else:
             print("El form no es valido")    
             return render(request,'blog/mensaje_no_enviado.html')

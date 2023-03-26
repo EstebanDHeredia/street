@@ -6,7 +6,7 @@
 *  ESTE ES MI NAV
 ********************************************* -->
 
-<div class="container-fluid p-0" style="background-color: rgb(255, 187, 0)">
+<div class="container-fluid p-0" style="background-color: rgb(255, 187, 0)" >
   <div class="row p-0">
     <div class="col-12">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -45,15 +45,15 @@
                   {% if request.user.is_authenticated == False %}
                   <li><a class="dropdown-item" id='login-view' href="{% url 'auth_login' %}" data-toggle="modal"
                       data-target="#loginModal">Ingresar</a></li>
-                  
-                    <li><a class="dropdown-item" href="{% url 'registration_register' %}" data-toggle="modal"
+
+                  <li><a class="dropdown-item" href="{% url 'registration_register' %}" data-toggle="modal"
                       data-target="#loginModal">Registrarse</a></li>
                   {% endif %}
                   {% if request.user.is_authenticated and request.user.is_active %}
                   {% if request.user.is_staff or request.user.is_superuser %}
                   <li><a class="dropdown-item" href='{% url "admin:index" %}'>Admin Panel</a></li>
                   <!---->
-                  <li><a class="dropdown-item" href='{% url "turnero_empleado" empleado_id=1 %}'>Turnero</a></li>
+                  <li><a class="dropdown-item" href='{% url "turnero"  %}'>Turnero</a></li>
                   <li><a class="dropdown-item" href='{% url "ordenes_index" %}'>Ordenes Diarias</a></li>
                   {% endif %}
                   {% endif %}
@@ -67,16 +67,18 @@
 
             <form class="d-flex">
               {% if request.user.is_authenticated %}
-                {% if request.user.is_staff or request.user.is_superuser %}
-                  <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{ request.user.last_name }} (Admin) </span>
-                {% else %}
-                  <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{ request.user.last_name }}</span>
-                {% endif %}
+              {% if request.user.is_staff or request.user.is_superuser %}
+              <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{
+                request.user.last_name }} (Admin) </span>
+              {% else %}
+              <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{
+                request.user.last_name }}</span>
               {% endif %}
-              <button class="btn btn-outline-light" type="submit"  formaction="{% url 'carrito' %}">
-                <i class="bi-cart-fill me-1" ></i>
+              {% endif %}
+              <button class="btn btn-outline-light" type="submit" formaction="{% url 'carrito' %}">
+                <i class="bi-cart-fill me-1"></i>
                 Carro
-                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                <span class="badge bg-dark text-white ms-1 rounded-pill" id="imagen_carrito">0</span>
               </button>
             </form>
           </div>
@@ -144,4 +146,31 @@
   <!-- Copyright -->
 </footer>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+
+  // document.addEventListener("DOMContentLoaded", function(event) {
+  // // Código a ejecutar cuando se completa la carga de la página
+  //  console.log("La página ha sido cargada completamente");
+  // "use strict";
+  // event.preventDefault();
+  // var miCarrito = document.getElementById("imagen_carrito");
+  // let i;
+  // localStorage.setItem("cant_productos_en_el_carrito",0)
+  // for (i = 0; i < localStorage.length; i++) {
+  //   if (clave_eliminar.startsWith("street_producto_")) {
+  //     cant_productos_en_el_carrito = cant_productos_en_el_carrito + 1;
+  //   };
+  // };
+  // miSpan.innerHTML = cant_productos_en_el_carrito;
+  // });
+
+  function miFuncion() {
+  // Aquí colocas el código que quieres que se ejecute cuando la página se cargue completamente
+  console.log("La página se ha cargado completamente!");
+};
+</script>
 {% endblock %}

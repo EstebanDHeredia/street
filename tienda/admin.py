@@ -105,6 +105,15 @@ class ProductoAdmin(admin.ModelAdmin):
         '''
         return format_html('<img src="http://127.0.0.1:8000/media/{}" style="width:10%;"/>', obj.imagen,)
 
+    actions = ['activar_productos', 'pausar_productos']
+
+    def activar_productos(self, request, queryset):
+        queryset.update(estado='activo')
+    activar_productos.short_description = "Activar productos seleccionados"
+
+    def pausar_productos(self, request, queryset):
+        queryset.update(estado='pausado')
+    pausar_productos.short_description = "Pausar productos seleccionados"
 
 # admin.site.register(Categoria,CategoriaAdmin)
 # admin.site.register(Autor)

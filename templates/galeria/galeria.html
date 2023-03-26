@@ -6,37 +6,33 @@
 *********************************************-->
 <header>
   <!-- Contenedor del Carrousel  -->
-  <div id="carouselExampleCaptions" class="carousel slide carousel-fade mt-5 bg-dark" data-bs-ride="false">
+  <div id="carouselExampleCaptions" class="carousel slide carousel-fade mt-5 bg-dark" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
+      {% for imagen in imagenes_destacadas %}  
+
+        {% if forloop.first %}
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter0}}" class="active" aria-current="true" aria-label="Slide {{forloop.counter}}"></button>
+        {% else %}
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{forloop.counter0}}"
+          aria-label="Slide {{forloop.counter}}"></button>
+        {% endif %}
+      {% endfor %}
+
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="5000">
-        <img src="/media/galeria/images/galeria1.jpg" class="d-block w-50 " style="margin: auto" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Equiqueta primer slide</h5>
-          <p>Lorem ipsum dolor sit amet.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="5000">
-        <img src="/media/galeria/images/galeria2.jpg" class="d-block w-50" style="margin: auto" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Etiqueta segundo slide</h5>
-          <p>Lorem ipsum dolor sit amet.</p>
-        </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="5000">
-        <img src="/media/galeria/images/galeria3.jpg" class="d-block w-50" style="margin: auto" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Etiqueta tercer slide</h5>
-          <p>Lorem ipsum dolor sit amet.</p>
-        </div>
-      </div>
+    <div class="carousel-inner" >
+      {% for imagen in imagenes_destacadas %}
+          {% if forloop.first %}
+            <div class="carousel-item active" data-bs-interval="2000">
+          {% else %}
+            <div class="carousel-item" data-bs-interval="2000">
+          {% endif %}
+            <img src="{{imagen.imagen.url}}" class="d-block mx-auto w-50" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{imagen.titulo}}</h5>
+              <p>{{imagen.cuerpo}}</p>
+            </div>
+          </div>
+      {% endfor %}
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -69,28 +65,12 @@
     <div class="photo-gallery mt-5">
       <div class="container">
         <div class="row photos">
+          {% for imagen in imagenes %}
           <div class="col-sm-6 col-md-4 col-lg-3 item"><a
-              href="/media/galeria/images/300566494_795336351617917_8420614701943986606_n.jpg"
+              href="{{imagen.imagen.url}}"
               data-lightbox="photos"><img class="img-fluid"
-                src="/media/galeria/images/300566494_795336351617917_8420614701943986606_n.jpg"></a></div>
-          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
-              href="/media/galeria/images/300615696_1507487016377691_7926308871762354148_n.jpg"
-              data-lightbox="photos"><img class="img-fluid"
-                src="/media/galeria/images/300615696_1507487016377691_7926308871762354148_n.jpg"></a></div>
-          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
-              href="/media/galeria/images/315647882_126138866928453_4139703692442653507_n.jpg"
-              data-lightbox="photos"><img class="img-fluid"
-                src="/media/galeria/images/315647882_126138866928453_4139703692442653507_n.jpg"></a></div>
-          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
-              href="/media/galeria/images/316466256_6268706693141607_2306908048606362920_n.jpg"
-              data-lightbox="photos"><img class="img-fluid"
-                src="/media/galeria/images/316466256_6268706693141607_2306908048606362920_n.jpg"></a></div>
-          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
-              href="/media/galeria/images/highlights - 17907155866270286 (1).jpg" data-lightbox="photos"><img
-                class="img-fluid" src="/media/galeria/images/highlights - 17907155866270286 (1).jpg"></a></div>
-          <div class="col-sm-6 col-md-4 col-lg-3 item"><a
-              href="/media/galeria/images/highlights - 18200753872056204.jpg" data-lightbox="photos"><img
-                class="img-fluid" src="/media/galeria/images/highlights - 18200753872056204.jpg"></a></div>
+                src="{{imagen.imagen.url}}"></a></div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -134,4 +114,40 @@ BOTONES DE PAGINACION
 
 </section>
 
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .carousel-item img {
+  width: 800px;
+  height: 600px;
+}
+
+.photo-gallery .item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.photo-gallery .item.fadeIn {
+  opacity: 1;
+  transform: none;
+}
+
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(window).scroll(function() {
+  $('.photo-gallery .item').each(function() {
+    var imagePos = $(this).offset().top;
+    var topOfWindow = $(window).scrollTop();
+    if (imagePos < topOfWindow + $(window).height() - 100) {
+      $(this).addClass('fadeIn');
+    }
+  });
+});
+
+</script>
 {% endblock %}

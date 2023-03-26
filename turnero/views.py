@@ -65,9 +65,10 @@ def turnero_index(request):
 #     return JsonResponse(eventos, safe=False)
 
 def turnero_empleado(request, empleado_id):
-    # Obtener los turnos del empleado
-    empleados = Empleado.objects.all()
-    # print(empleados)
+    # Obtendo la lista de empleados que tienen un turno asignado
+    empleados = Empleado.objects.filter(turno__isnull=False).distinct()
+
+    # Obtener los turnos del empleado pasado por parametro
     turnos = Turno.objects.filter(empleado__id=empleado_id)
 
     # Pasar los turnos al contexto para su uso en el template
@@ -75,7 +76,6 @@ def turnero_empleado(request, empleado_id):
         'turnos': turnos,
         'empleados': empleados,
     }
-    print(context)
     return render(request, 'turnero/turnero_empleado.html', context)
 
 def turnero(request):

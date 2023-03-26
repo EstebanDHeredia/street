@@ -4,7 +4,7 @@
 *  ESTE ES MI HEADER
 *********************************************-->
 
-<header class="container-fluid p-0" style="">
+<header class="container-fluid p-0">
   <div class="row p-0">
     <div class="container col-12 " style=" position: relative">
       <img src="/media/desarrollo/front.jpg" style="width: 100%" />
@@ -21,13 +21,13 @@
 <!--********************************************
 *  ESTE ES MI SECTION PRIMARIO
 *********************************************-->
-<div class="row">
+<div class="row  " >
   <div class="col-12">
     <center><h1 class="mt-5 mb-5">Bienvenidos a nuestra peluquería</h1></center>
   </div>
 </div>
 
-<div class="card mb-5" style="border:none; max-width: 100%">
+<div class="card mb-5 " style="border:none; max-width: 100%;">
   <div class="row g-0">
     <div class="col-md-4">
       <img
@@ -57,7 +57,7 @@
 *********************************************-->
 
 
-<section class="text-center mb-5 mb-5">
+<section class="text-center mb-5 mb-5 ">
 
 
     <h3 class="mb-5">Contáctanos</h3>
@@ -126,13 +126,77 @@
             </div>
           </div>
         </form>
-  
       </div>
     </div>
   
-  
-  </section>
-
 
 
 {% endblock inicio %}
+
+{% block mensaje %}
+<!-- código del mensaje -->
+
+<div id="mensaje-modal" class="modal fade ">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mensaje enviado correctamente</h5>
+        <button type="button" class="close" data-dismiss="modal" onclick="cerrarModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Gracias por contactarnos. Nos pondremos en contacto contigo pronto.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+</section>
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    {% if mensaje_enviado %}
+        $('#mensaje-modal').modal('show');
+    {% endif %}
+});
+
+function cerrarModal() {
+  $('#mensaje-modal').modal('hide');
+};
+
+
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Estilos para la ventana modal */
+/* Estilos para la ventana modal */
+#mensaje-modal .modal-header {
+  background-color: #007bff;
+  color: white;
+}
+
+#mensaje-modal .modal-body {
+  font-size: 20px;
+}
+
+#mensaje-modal .modal-footer {
+  background-color: #f4f4f4;
+}
+
+#mensaje-modal .modal-footer button {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+#mensaje-modal .modal-footer button:hover {
+  background-color: #0069d9;
+}
+
+
+</style>
+{% endblock %}
+

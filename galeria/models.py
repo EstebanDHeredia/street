@@ -1,6 +1,8 @@
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from io import BytesIO
+from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
-
 # Create your models here.
 
 
@@ -47,3 +49,23 @@ class Imagen(models.Model):
 
     def __str__(self) -> str:
         return self.titulo
+    
+    # modifico el save para asegurarme que todas las imagenes tengan la misma relacion de aspecto
+    def save(self, *args, **kwargs):
+    # Ajustar la proporción de aspecto de la imagen
+        if self.imagen:
+            image = Image.open(self.imagen)
+            width, height = image.size
+            aspect_ratio = width / height
+            target_aspect_ratio = 1.5
+            if aspect_ratio != target_aspect_ratio:
+                new_width = int(height * target_aspect_ratio)
+                image = image.resize((new_width, height))
+
+                # Sobreescribe el archivo de imagen original con el nuevo archivo
+                output = BytesIO()
+                image.save(output, format='JPEG')
+                output.seek(0)
+                self.imagen = InMemoryUploadedFile(output, 'ImageField', f"{self.titulo}.jpg", 'image/jpeg', output.getbuffer().nbytes, None)
+
+        super().save(*args, **kwargs)
