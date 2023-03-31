@@ -68,11 +68,9 @@
             <form class="d-flex">
               {% if request.user.is_authenticated %}
               {% if request.user.is_staff or request.user.is_superuser %}
-              <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{
-                request.user.last_name }} (Admin) </span>
+              <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{ request.user.last_name }} (Admin) </span>
               {% else %}
-              <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{
-                request.user.last_name }}</span>
+              <span class=" me-3 navbar-text" style="display:inline;">Bienvenido, {{ request.user.first_name }} {{ request.user.last_name }}</span>
               {% endif %}
               {% endif %}
               <button class="btn btn-outline-light" type="submit" formaction="{% url 'carrito' %}">

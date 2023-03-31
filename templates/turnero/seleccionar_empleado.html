@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+{% load i18n %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'fullcalendar/lib/main.css' %}">
+
+{% endblock extra_css%}
+
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<!--Incorporo la libreria jscookie para que Cookies.ger no me de error -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script src="{% static 'fullcalendar/lib/main.js' %}"></script>
+<script src="{% static 'fullcalendar/lib/locales-all.js' %}"></script>
+
+
+<script type="text/javascript">
+    /*jslint browser: true*/
+    /*jslint plusplus: true*/
+    /*global FormData: false*/
+    /*global $, jQuery, alert, console*/
+    /* PARA VALIDAR LOS DATOS */
+    var csrftoken = Cookies.get('csrftoken');
+    function csrfSafeMethod(method) {
+        "use strict";
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    // cuando cambia el empleado seleccionado se llama a esta
+    // funcion que hace un ajax para traer los turnos del empleado
+    $(document).ready(function () {
+        $("#empleados").change(function () {
+            $.ajax({
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                },
+                url: "/turnero/turnero_empleado_ajax/",
+                type: "GET",
+                data: { 'empleado_id': $("#empleados").val() },
+                dataType: 'json',
+                success: function (eventos) {
+
+                    // Llamo a la funcion que llena el calendario
+                    // y le paso como parametros los turnos del empleado seleccionado
+                    cargarCalendario(eventos);
+
+
+
+
+                }
+            });
+        });
+    });
+
+    // FUNCION QUE CARGA LOS TURNOS EN EL CALENDARIO DE ACUERDO AL EMPLEADO SELECCIONADO
+    function cargarCalendario(eventos) {
+        var calendarEl = document.getElementById('calendario');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: "bootstrap5",
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+
+            locale: 'es',
+            events: eventos.map(turno => {
+                console.log = turno.estado;
+                let color = "";
+                if (turno.estado === "cancelado") {
+                    color = "red";
+                } else if (turno.estado === "confirmado") {
+                    color = "green";
+                } else {
+                    color = "blue";
+                }
+                return {
+                    title: turno.cliente,
+                    start: turno.start,
+                    end: turno.end,
+                    color: color,
+                    description: turno.id,
+                    display: 'block',
+                    url: '/admin/turnero/turno/' + turno.id + '/change/',
+                };
+            }),
+
+            eventTimeFormat: { // like '14:30:00'
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: false
+            },
+
+
+
+            // muestra un tooltip cuando me posiono sobre el evento del calendario
+            // corrige el bug de que no se muestra el tooltip en el calendario
+            //
+            eventDidMount: function (info) {
+                $(info.el).tooltip({
+                    title: info.event.extendedProps.description,
+                    placement: 'top',
+                    trigger: 'hover',
+                    container: 'body'
+                });
+            },
+        });
+
+
+        calendar.render();
+    }
+
+
+
+</script>
+{% endblock scripts%}
+
+
+{% block turnero %}
+
+<div class="dropdown-container" style="display: flex; justify-content: center; margin-top:30px; padding-bottom: 50px">
+    <strong>Seleccionar empleado...</strong>
+    <select id="empleados">
+        <option value="">Seleccione un empleado</option>
+        {% for empleado in empleados %}
+        <option value="{{empleado.id}}">{{empleado}}</option>
+        {% endfor %}
+    </select>
+</div>
+
+
+<div id="turnos">
+
+</div>
+<div id='calendario'></div>
+
+<style>
+    #calendario {
+        height: 70vh;
+    }
+</style>
+{% endblock %}
