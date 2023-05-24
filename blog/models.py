@@ -68,7 +68,7 @@ class Post(models.Model):
         ('eliminado', "Eliminado")
     ]
     titulo = models.CharField(max_length=100)
-    resumen = models.CharField(max_length=255)
+    resumen = models.TextField()
     cuerpo = models.TextField()
     creado_en = models.DateTimeField()
     publicado_en = models.DateTimeField()

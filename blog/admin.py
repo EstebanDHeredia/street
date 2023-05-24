@@ -26,7 +26,7 @@ class ComentarioAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class BlogAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("Descripción", {"fields": ["titulo", "cuerpo", "autor", "creado_en", "slug"]}),
+        ("Descripción", {"fields": ["titulo", "resumen", "cuerpo", "autor", "creado_en", "slug"]}),
         ("Publicacion", {"fields": ["publicado_en", "estado"]}),
         ("Imagen / Categoria", {"fields": ["imagen", "categoria", "etiquetas"]}),
     ]

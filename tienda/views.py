@@ -94,6 +94,7 @@ def tienda_index(request):
 
 
 class Carrito(View):
+
     template = "tienda/localstorage.html"
 
     def get(self, request):
@@ -114,3 +115,7 @@ class Carrito(View):
             print("Carro inexistente, se inicializa nuevo carro")
         
         return render(request, self.template, params)
+
+def checkout(request):
+    print("Hice clic en checkout")
+    return render(request, 'tienda/checkout.html')
