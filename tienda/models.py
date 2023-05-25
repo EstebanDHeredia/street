@@ -40,7 +40,7 @@ class Producto(models.Model):
     estado = models.CharField(max_length=255, choices=ESTADO, default="activo")
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
-    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
     imagen = models.ImageField(upload_to='tienda/productos/images/', null=True, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     stock = models.PositiveIntegerField()

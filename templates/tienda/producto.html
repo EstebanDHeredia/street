@@ -190,7 +190,20 @@ function AgregarProducto(producto_id, valor_actual, valor_a_agregar) {
         localStorage.setItem(json[0].idproducto.toString(), json[0].cantidad.toString());
         //location.reload();
         console.log("----------------------------------")
-      },
+
+        // Actualizo el valor del dibujo del carrito en el menu
+        let cantidad_total = 0;
+        for (let i = 0; i < localStorage.length; i++) {
+          let clave = localStorage.key(i);
+          if (clave.startsWith("street_producto_")) {
+            let valor = localStorage.getItem(clave);
+            cantidad_total = cantidad_total + parseInt(valor);
+          }
+        }
+        console.log("Cantidad total de productos en el carrito: ", cantidad_total);
+        $("#imagen_carrito").text(cantidad_total.toString());
+
+    },
       error: function (xhr, errmsg, err) {
         console.log('Error en carga de respuesta')
       }
